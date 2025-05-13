@@ -115,5 +115,22 @@ class RepositorioDeEstados:
             for id_estado, datos in estados_cargados.items():
                 self.agregar_estado(id_estado, datos["vector"], datos["base"])
 
+    
+    def __str__(self):
+        """
+        Representación en texto del repositorio, mostrando los identificadores de los estados.
+
+        :return: Cadena que lista todos los identificadores de los estados.
+        """
+        return f"Repositorio de Estados: {', '.join(self.estados.keys())}"
+
+    def __repr__(self):
+        """
+        Representación técnica del repositorio de estados.
+
+        :return: Cadena que incluye los identificadores de los estados.
+        """
+        return f"RepositorioDeEstados(estados={list(self.estados.keys())})"
+
  
 
