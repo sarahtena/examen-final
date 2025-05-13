@@ -11,7 +11,7 @@ class EstadoCuantico:
         if not vector_estado:
             raise ValueError("El vector de estado no puede estar vacío.")
         self.identificador = identificador
-        self.vector_estado = vector_estado
+        self.vector_estado = [complex(x) for x in vector_estado]
         self.base = base
 
     def medir(self):
