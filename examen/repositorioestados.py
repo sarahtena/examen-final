@@ -1,5 +1,6 @@
 import json
 import json
+from estadocuantico import EstadoCuantico
 
 class RepositorioDeEstados:
     """
