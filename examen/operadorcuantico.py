@@ -1,16 +1,5 @@
 import numpy as np
-
-class EstadoCuantico:
-    def __init__(self, vector_estado):
-        """
-        Representa un estado cuántico como un vector de amplitudes.
-        :param vector_estado: numpy.ndarray que representa el estado cuántico.
-        """
-        self.vector_estado = np.array(vector_estado, dtype=complex)
-
-    def __repr__(self):
-        return f"EstadoCuantico({self.vector_estado})"
-
+from estadocuantico import EstadoCuantico
 
 class OperadorCuantico:
     def __init__(self, matriz_unitaria, nombre=""):
