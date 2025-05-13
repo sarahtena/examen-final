@@ -1,4 +1,5 @@
 from typing import List, Union
+import cmath
 class EstadoCuantico:
     def __init__(self, identificador: str, vector_estado: List[Union[float, complex]], base: str = "computacional"):
         """
@@ -14,6 +15,14 @@ class EstadoCuantico:
         self.vector_estado = [complex(x) for x in vector_estado]
         self.base = base
 
+    def _esta_normalizado(self):
+        """
+        Verifica si el vector de estado está normalizado, es decir, la suma de los cuadrados de
+        las amplitudes debe ser igual a 1 (con una tolerancia numérica).
+        """
+        suma_cuadrados = sum(abs(amplitud)**2 for amplitud in self.vector_estado)
+        return cmath.isclose(suma_cuadrados, 1.0)
+
     def medir(self):
         """
         Calcula las probabilidades de resultados de medición a partir del vector de estado.
@@ -22,7 +31,6 @@ class EstadoCuantico:
         """
         probabilidades = {str(i): abs(amplitud)**2 for i, amplitud in enumerate(self.vector_estado)}
         return probabilidades
-
     def __str__(self):
         """
         Representación en texto del estado cuántico.
@@ -63,12 +71,6 @@ class EstadoCuantico:
         """
         return self.identificador
     
-    def _esta_normalizado(self):
-        """
-        Verifica si el vector de estado está normalizado, es decir, la suma de los cuadrados de
-        las amplitudes debe ser igual a 1 (con una tolerancia numérica).
-        """
-        suma_cuadrados = sum(abs(amplitud)**2 for amplitud in self.vector_estado)
-        return cmath.isclose(suma_cuadrados, 1.0)
+   
     
 
