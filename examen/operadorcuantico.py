@@ -23,7 +23,7 @@ class OperadorCuantico:
         :param estado: Objeto EstadoCuantico al que se aplicará el operador.
         :return: Nuevo objeto EstadoCuantico resultante.
         """
-        nuevo_vector = self.matriz_unitaria @ estado.vector_estado
+        nuevo_vector = np.array(estado.obtener_vector(), dtype=complex)
         return EstadoCuantico(nuevo_vector)
 
     def __repr__(self):
