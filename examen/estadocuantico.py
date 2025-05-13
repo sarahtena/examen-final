@@ -1,5 +1,6 @@
+from typing import List, Union
 class EstadoCuantico:
-    def __init__(self, identificador, vector_estado, base="computacional"):
+    def __init__(self, identificador: str, vector_estado: List[Union[float, complex]], base: str = "computacional"):
         """
         Inicializa un estado cuántico.
 
@@ -7,6 +8,8 @@ class EstadoCuantico:
         :param vector_estado: Lista de amplitudes (floats o números complejos).
         :param base: Base en la que está expresado el vector (por defecto "computacional").
         """
+        if not vector_estado:
+            raise ValueError("El vector de estado no puede estar vacío.")
         self.identificador = identificador
         self.vector_estado = vector_estado
         self.base = base
