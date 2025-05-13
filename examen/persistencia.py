@@ -29,7 +29,7 @@ def cargar_estados_json(archivo: str) -> dict:
             estados[estado.id] = estado
     return estados
 
-    def guardar(self, archivo: str):
+def guardar(self, archivo: str):
         """
         Guarda todos los estados cuánticos en un archivo JSON.
         Maneja errores de escritura (permiso, disco lleno, etc.).
