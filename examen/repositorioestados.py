@@ -55,21 +55,26 @@ class RepositorioDeEstados:
             raise KeyError(f"El estado con ID '{id_estado}' no existe.")
         return estado
     
-    def aplicar_operador(self, id_estado, op, nuevo_id=None):
+    def aplicar_operador(self, id_estado, operador, nuevo_id=None):
         """
         Aplica un operador cuántico a un estado existente y registra el resultado.
 
         :param id_estado: Identificador del estado cuántico al que se aplicará el operador.
-        :param op: OperadorCuantico que se aplicará al estado.
+        :param operador: OperadorCuantico que se aplicará al estado.
         :param nuevo_id: Identificador para el nuevo estado resultante (opcional).
         :raises KeyError: Si el identificador del estado no existe en el repositorio.
         :raises ValueError: Si el nuevo identificador ya existe en el repositorio.
+        :raises ValueError: Si las dimensiones del operador y el estado no coinciden.
         """
         # Obtener el estado cuántico original
         estado_original = self.obtener_estado(id_estado)
 
+        # Validar que las dimensiones del operador coincidan con las del estado
+        if len(estado_original.vector) != len(operador.matriz):
+            raise ValueError("Las dimensiones del operador y el estado no coinciden.")
+
         # Aplicar el operador al estado original
-        nuevo_vector = op.aplicar(estado_original.vector)
+        nuevo_vector = operador.aplicar(estado_original.vector)
 
         # Determinar el identificador del nuevo estado
         if nuevo_id:
@@ -77,7 +82,7 @@ class RepositorioDeEstados:
                 raise ValueError(f"El estado con ID '{nuevo_id}' ya existe.")
             id_resultante = nuevo_id
         else:
-            id_resultante = f"{id_estado}_{op.nombre}"
+            id_resultante = f"{id_estado}_{operador.nombre}"
 
         # Crear y registrar el nuevo estado
         self.agregar_estado(id_resultante, nuevo_vector, estado_original.base)
