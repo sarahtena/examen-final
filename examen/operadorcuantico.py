@@ -2,14 +2,16 @@ import numpy as np
 from estadocuantico import EstadoCuantico
 
 class OperadorCuantico:
-    def __init__(self, matriz_unitaria, nombre=""):
+    def __init__(self, nombre: str, matriz: Union[list[list[complex]], np.ndarray]):
         """
         Representa un operador cuántico como una matriz unitaria.
         :param matriz_unitaria: numpy.ndarray que representa la matriz unitaria.
         :param nombre: Nombre o identificador del operador.
         """
-        self.matriz_unitaria = np.array(matriz_unitaria, dtype=complex)
+        self.matriz = np.array(matriz, dtype=complex)
         self.nombre = nombre
+        if self.matriz.shape[0] != self.matriz.shape[1]:
+            raise ValueError("La matriz del operador debe ser cuadrada.")
 
         # Verificar que la matriz es unitaria
         if not np.allclose(self.matriz_unitaria @ self.matriz_unitaria.conj().T, np.eye(self.matriz_unitaria.shape[0])):
