@@ -1,0 +1,20 @@
+import unittest
+from src.estado_cuantico import EstadoCuantico
+from src.repositorio import RepositorioDeEstados
+from src.operador_cuantico import OperadorCuantico
+
+class TestRepositorio(unittest.TestCase):
+    def test_agregar_y_listar(self):
+        repo = RepositorioDeEstados()
+        estado = EstadoCuantico("q0", [1, 0])
+        repo.agregar_estado(estado)
+        self.assertIn("q0", repo.listar_estados())
+
+    def test_aplicar_operador(self):
+        repo = RepositorioDeEstados()
+        estado = EstadoCuantico("q0", [1, 0])
+        repo.agregar_estado(estado)
+        X = OperadorCuantico("X", [[0, 1], [1, 0]])
+        repo.aplicar_operador("q0", X, nuevo_id="q0_X")
+        nuevo = repo.obtener_estado("q0_X")
+        self.assertAlmostEqual(nuevo.vector[1], 1.0)
