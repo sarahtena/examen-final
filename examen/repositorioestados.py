@@ -89,17 +89,25 @@ class RepositorioDeEstados:
 
     def medir_estado(self, id_estado):
         """
-        Mide el estado cuántico con el identificador dado y retorna sus probabilidades de medición.
+        Mide el estado cuántico con el identificador dado y retorna las probabilidades de medición.
 
         :param id_estado: Identificador del estado cuántico a medir.
-        :return: Lista de probabilidades de medición.
+        :return: Diccionario con las probabilidades de medición.
         :raises KeyError: Si el identificador no existe en el repositorio.
         """
         # Obtener el estado cuántico
         estado = self.obtener_estado(id_estado)
         
-        # Retornar las probabilidades de medición usando el método medir() de EstadoCuantico
-        return estado.medir()
+        # Obtener las probabilidades de medición usando el método medir() de EstadoCuantico
+        probabilidades = estado.medir()
+        
+        # Formatear las probabilidades en un mensaje entendible
+        mensaje = f"Medición del estado '{id_estado}' en base {estado.base}:\n"
+        for i, probabilidad in enumerate(probabilidades):
+            mensaje += f"- Resultado {i}: {probabilidad * 100:.2f}%\n"
+        
+        print(mensaje)
+        return probabilidades
     
     def guardar(self, archivo):
         """
