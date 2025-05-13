@@ -12,14 +12,16 @@ class RepositorioDeEstados:
         Inicializa el repositorio con un diccionario vacío para almacenar los estados cuánticos.
         """
         self.estados = {}
-
     def listar_estados(self):
         """
-        Lista todos los estados cuánticos registrados con sus descripciones.
+        Devuelve una lista con las descripciones de todos los estados cuánticos almacenados en el repositorio.
 
-        :return: Una lista de strings descriptivos de los estados cuánticos.
+        :return: Lista de descripciones de los estados, o mensaje indicando que no hay estados registrados.
         """
-        return [f"ID: {id_estado}, Estado: {estado}" for id_estado, estado in self.estados.items()]
+        if not self.estados:
+            return ["No hay estados registrados"]
+        
+        return [str(estado) for estado in self.estados.values()]
 
     def agregar_estado(self, estado):
         """
