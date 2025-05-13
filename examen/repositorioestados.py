@@ -21,23 +21,16 @@ class RepositorioDeEstados:
         """
         return [f"ID: {id_estado}, Estado: {estado}" for id_estado, estado in self.estados.items()]
 
-    def agregar_estado(self, id_estado, vector, base):
+    def agregar_estado(self, estado):
         """
-        Crea un nuevo estado cuántico con los datos proporcionados y lo registra en el repositorio.
+        Agrega un nuevo estado cuántico al repositorio.
 
-        :param id_estado: Identificador único del estado cuántico.
-        :param vector: Vector que representa el estado cuántico.
-        :param base: Base en la que se define el estado cuántico.
-        :raises ValueError: Si el identificador ya existe en el repositorio.
+        :param estado: Instancia de la clase EstadoCuantico que se desea agregar.
         """
-        if id_estado in self.estados:
-            raise ValueError(f"El estado con ID '{id_estado}' ya existe.")
+        if estado.identificador in self.estados:
+            raise ValueError(f"El estado con identificador {estado.identificador} ya existe en el repositorio.")
         
-        # Crear un nuevo objeto EstadoCuantico
-        estado_cuantico = EstadoCuantico(vector, base)
-        
-        # Registrar el estado cuántico en el repositorio
-        self.estados[id_estado] = estado_cuantico
+        self.estados[estado.identificador] = estado
 
     def obtener_estado(self, id_estado):
         """
