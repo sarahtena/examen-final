@@ -47,6 +47,11 @@ class OperadorCuantico:
         return f"{self.nombre}: matriz={self.matriz}"
 
     def __repr__(self):
+        """
+        Representación técnica del operador cuántico.
+
+        :return: Cadena con el nombre del operador y la matriz.
+        """
         return f"OperadorCuantico(nombre={self.nombre}, matriz={self.matriz})"
 
 
