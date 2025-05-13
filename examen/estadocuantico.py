@@ -61,3 +61,13 @@ class EstadoCuantico:
         :return: Identificador del estado.
         """
         return self.identificador
+    
+    def _esta_normalizado(self):
+        """
+        Verifica si el vector de estado está normalizado, es decir, la suma de los cuadrados de
+        las amplitudes debe ser igual a 1 (con una tolerancia numérica).
+        """
+        suma_cuadrados = sum(abs(amplitud)**2 for amplitud in self.vector_estado)
+        return cmath.isclose(suma_cuadrados, 1.0)
+    
+

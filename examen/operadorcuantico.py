@@ -1,4 +1,5 @@
 import numpy as np
+from typing import Union
 from estadocuantico import EstadoCuantico
 
 class OperadorCuantico:
@@ -23,24 +24,18 @@ class OperadorCuantico:
         :param estado: Objeto EstadoCuantico al que se aplicará el operador.
         :return: Nuevo objeto EstadoCuantico resultante.
         """
-        nuevo_vector = np.array(estado.obtener_vector(), dtype=complex)
-        return EstadoCuantico(nuevo_vector)
+    def aplicar(self, estado: EstadoCuantico) -> EstadoCuantico:
+        """
+        Aplica el operador cuántico a un estado cuántico.
+        :param estado: Objeto EstadoCuantico al que se aplicará el operador.
+        :return: Nuevo objeto EstadoCuantico resultante.
+        """
+        nuevo_vector = estado.vector  # Asumimos que EstadoCuantico tiene un atributo 'vector'
+        if len(nuevo_vector) != self.matriz.shape[1]:
+            raise ValueError("La dimensión del vector de estado no coincide con la del operador.")
+        return EstadoCuantico(self.matriz @ nuevo_vector)
 
     def __repr__(self):
-        return f"OperadorCuantico(nombre={self.nombre}, matriz_unitaria={self.matriz_unitaria})"
+        return f"OperadorCuantico(nombre={self.nombre}, matriz={self.matriz})"
 
 
-# Ejemplo de uso:
-if __name__ == "__main__":
-    # Definir el estado |0⟩
-    estado_cero = EstadoCuantico([1, 0])
-
-    # Definir la puerta X
-    puerta_x = OperadorCuantico([[0, 1], [1, 0]], nombre="PuertaX")
-
-    # Aplicar la puerta X al estado |0⟩
-    estado_resultante = puerta_x.aplicar(estado_cero)
-
-    print("Estado inicial:", estado_cero)
-    print("Operador:", puerta_x)
-    print("Estado resultante:", estado_resultante)
