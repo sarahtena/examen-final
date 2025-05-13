@@ -18,9 +18,10 @@ class EstadoCuantico:
         """
         Calcula las probabilidades de resultados de medición a partir del vector de estado.
 
-        :return: Lista de probabilidades (|amplitud|^2 para cada componente).
+        :return: Diccionario de probabilidades de medir cada estado base.
         """
-        return [abs(amplitud)**2 for amplitud in self.vector_estado]
+        probabilidades = {str(i): abs(amplitud)**2 for i, amplitud in enumerate(self.vector_estado)}
+        return probabilidades
 
     def __str__(self):
         """
